@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <div>
+  <div class="display-lg">
     <a href={{randomId}} class="nav-link">
       Random Comic
       <img class="navbar-icon" src="/icons/random.svg" />
@@ -10,13 +10,13 @@
       Cyber City Comics
     </a>
   </div>
-  <div>
+  <div class="display-lg">
     <form action="/find" method="POST" class="search-form">
       <input
         type="number"
         id="find"
         name="find"
-        placeholder="Comic ID"
+        placeholder="Enter Comic ID"
         class="find-comic"
       />
       <button class="find-button" type="submit">
@@ -24,5 +24,33 @@
       </button>
     </form>
   </div>
-
-</nav>
+  <div class="display-md">
+    <div class="toggle-button">
+      <a href="#nav-show" class="nav-link"><img
+          class="navbar-icon"
+          src="/icons/nav.svg"
+        /></a>
+    </div>
+  </div>
+</nav><div class="display-md">
+  <div class="nav-content" id="nav-show">
+    <a href="#nav-hide" class="nav-link">Close Navigation
+      <img class="navbar-icon" src="/icons/nav-close.svg" /></a>
+    <a href={{randomId}} class="nav-link">
+      Random Comic
+      <img class="navbar-icon" src="/icons/random.svg" />
+    </a>
+    <form action="/find" method="POST" class="search-form">
+      <input
+        type="number"
+        id="find"
+        name="find"
+        placeholder="Enter Comic ID"
+        class="find-comic"
+      />
+      <button class="find-button" type="submit">
+        <img class="navbar-icon" src="/icons/search.svg" />
+      </button>
+    </form>
+  </div>
+</div>

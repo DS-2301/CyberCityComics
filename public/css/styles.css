@@ -57,12 +57,17 @@ body {
   max-width: 80%;
 }
 
-#transcript-show {
+#transcript-show,
+#nav-show {
   display: none;
+}
+
+#transcript-show {
   padding-top: 2em;
 }
 
-#transcript-hide:target {
+#transcript-hide:target,
+#nav-hide:target {
   display: none;
 }
 
@@ -70,8 +75,19 @@ body {
   display: block;
 }
 
+#nav-show:target {
+  display: flex;
+}
+
 #transcript-show > .nav-link {
   margin: auto;
+}
+
+.nav-content {
+  background-image: url("/images/navbarCover.png");
+  background-size: 100vw;
+  background-color: white;
+  width: 100%;
 }
 
 .scene-description {
@@ -147,7 +163,8 @@ body {
   text-decoration: none;
   cursor: pointer;
   color: black;
-  text-shadow: 3px 3px rgba(255, 80, 80, 0.699);
+  text-shadow: 3px 3px rgba(255, 80, 80, 0.699), -1px 0 white, 0 1px white,
+    1px 0 white, 0 -1px white;
 }
 
 .navbar-icon {
@@ -172,7 +189,7 @@ body {
 }
 
 .nav-link:hover {
-  color: red;
+  box-shadow: 2px 2px 2px 2px red;
 }
 
 .search-form {
@@ -180,12 +197,11 @@ body {
   align-items: center;
   justify-content: center;
   border: 1px solid black;
-  height: 2em;
-  width: 10em;
   margin: 0;
-  background-color: rgb(255, 103, 103);
+  background-color: rgb(255, 80, 80);
   border: solid 1px black;
   border-radius: 0.5em;
+  height: 2.7em;
 }
 
 .find-comic {
@@ -193,11 +209,10 @@ body {
   display: flex;
   margin-right: 0;
   padding-left: 1em;
-  height: 2em;
-  width: 8em;
+  height: 2.7em;
   font-family: "Staatliches", cursive;
   font-size: 16px;
-  background-color: rgb(255, 103, 103);
+  background-color: rgb(255, 80, 80);
   border: none;
   border-radius: 0.5em;
 }
@@ -216,11 +231,11 @@ input[type="number"] {
   display: flex;
   padding: 0.3em;
   margin-left: 0;
-  height: 2em;
-  width: 2em;
+  height: 2.7em;
+  width: 2.7em;
   font-family: "Staatliches", cursive;
   font-size: 16px;
-  background-color: rgb(255, 103, 103);
+  background-color: rgb(255, 80, 80);
   border: none;
   border-left: black 1px solid;
   border-radius: 0 0.5em 0.5em 0;
@@ -228,6 +243,13 @@ input[type="number"] {
 
 .find-button > .navbar-icon {
   padding: 0;
+  height: 1.5vw;
+  width: 1.5vw;
+  margin: auto;
+}
+
+.display-md {
+  display: none;
 }
 
 .not-found {
@@ -240,6 +262,23 @@ input[type="number"] {
 }
 
 @media (max-width: 768px) {
+  .toggle-button > .nav-link {
+    width: fit-content;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+  }
+
+  .toggle-button > .nav-link > .navbar-icon {
+    padding: 0;
+  }
+
+  .display-lg {
+    display: none;
+  }
+
+  .display-md {
+    display: block;
+  }
+
   .container {
     width: 90vw;
   }
@@ -247,36 +286,60 @@ input[type="number"] {
   .comic-img {
     max-width: 70vw;
   }
+
+  .nav-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: calc(5.2em + 1px);
+    border-bottom: solid black 1px;
+  }
+
+  .search-form {
+    width: 90vw;
+    height: 2.7em;
+    margin-bottom: 0.5em;
+  }
+
+  .find-comic {
+    width: 85vw;
+    padding-left: 0.2em;
+    height: 2.7em;
+  }
+
+  #nav-show > .nav-link {
+    margin-bottom: 0.5em;
+    width: 90vw;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  #nav-show > .nav-link:first-child {
+    margin-top: 0.5em;
+  }
+
+  .navbar-icon {
+    height: 1em;
+    width: 1em;
+  }
+
+  .find-button {
+    align-items: center;
+    justify-content: center;
+    width: 2.7em;
+    height: 2.7em;
+  }
+
+  ::placeholder {
+    font-size: 1.2em;
+  }
 }
 
 @media (max-width: 425px) {
   .logo {
-    font-size: 7vw;
+    font-size: 12vw;
   }
-
-  .navbar > div > .nav-link {
-    width: 3em;
-    font-size: 0.7em;
-  }
-
-  .search-form {
-    width: 4em;
-  }
-
-  .find-comic {
-    width: 2em;
-    padding-left: 0.2em;
-  }
-
-  ::placeholder {
-    font-size: 0.5em;
-    text-justify: center;
-  }
-
-  .find-button {
-    width: 2em;
-  }
-
   .card-header {
     font-size: 1.4em;
   }
@@ -289,5 +352,9 @@ input[type="number"] {
   .views-date {
     font-size: 1em;
     padding: 0.5em 1em 0.5em 1em;
+  }
+
+  ::placeholder {
+    font-size: 1.2em;
   }
 }
