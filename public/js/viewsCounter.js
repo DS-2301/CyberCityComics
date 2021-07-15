@@ -50,7 +50,6 @@ module.exports.addViews = function (num) {
         resolve(viewInfo);
       })
       .catch((err) => {
-        console.log(err);
         reject(err);
       });
   });

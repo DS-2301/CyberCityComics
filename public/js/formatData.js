@@ -36,7 +36,6 @@ module.exports = {
     }
     return parsedTranscript;
   },
-  // parseAlt: function (alt) <-- TODO
   formatDate: function (response) {
     return new Date(
       `${response.year}-${("0" + response.month).slice(-2)}-${(
