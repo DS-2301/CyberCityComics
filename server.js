@@ -7,10 +7,7 @@ var HTTP_PORT = process.env.PORT || 8080;
 
 var loadComicInfo = require("./public/js/loadComicInfo");
 var formatData = require("./public/js/formatData");
-
-function onHttpStart() {
-  console.log("Express http server listening on: " + HTTP_PORT);
-}
+var viewsCounter = require("./public/js/viewsCounter");
 
 app.engine(
   "hbs",
@@ -24,9 +21,6 @@ app.engine(
       },
       prevComic: function (value) {
         return `/comic/${parseInt(value) - 1}`;
-      },
-      randomComic: function () {
-        return `/comic/${Math.floor(Math.random() * (2488 - 1) + 1)}`;
       },
     },
   })
@@ -52,14 +46,43 @@ app.get("/comic", (req, res) => {
     .then((response) => {
       response.date = formatData.formatDate(response);
       const displayTranscript = response.transcript.length === 0 ? false : true;
+      const disabledPrev = response.num == 1 ? false : true;
+      const disabledNext = false;
+      const randomId = `/comic/${Math.floor(
+        Math.random() * (response.num - 1) + 1
+      )}`;
       response.transcript = formatData.parseTranscript(response.transcript);
-      res.render("home", {
-        data: response,
-        displayTranscript: displayTranscript,
-      });
+      viewsCounter
+        .addViews(response.num)
+        .then((viewsData) => {
+          res.render("home", {
+            data: response,
+            displayTranscript: displayTranscript,
+            disabledPrev: disabledPrev,
+            disabledNext: disabledNext,
+            randomId: randomId,
+            views: viewsData === null ? 0 : viewsData.views,
+          });
+        })
+        .catch((error) => {
+          res.render("home", { err: true });
+        });
     })
     .catch((error) => {
-      res.render("home", { err: true });
+      loadComicInfo
+        .currentComicNum()
+        .then((currentComicNum) => {
+          const randomId = `/comic/${Math.floor(
+            Math.random() * (currentComicNum - 1) + 1
+          )}`;
+          res.render("home", {
+            err: true,
+            randomId: randomId,
+          });
+        })
+        .catch((error) => {
+          res.render("home", { err: true });
+        });
     });
 });
 
@@ -68,15 +91,53 @@ app.get("/comic/:id", (req, res) => {
     .getComicById(req.params.id)
     .then((response) => {
       response.date = formatData.formatDate(response);
-      const displayTranscript = response.transcript.length === 0 ? false : true;
-      response.transcript = formatData.parseTranscript(response.transcript);
-      res.render("home", {
-        data: response,
-        displayTranscript: displayTranscript,
-      });
+      loadComicInfo
+        .currentComicNum()
+        .then((currentComicNum) => {
+          const displayTranscript =
+            response.transcript.length === 0 ? false : true;
+          const disabledPrev = response.num == 1 ? false : true;
+          const disabledNext = response.num == currentComicNum ? false : true;
+          const randomId = `/comic/${Math.floor(
+            Math.random() * (currentComicNum - 1) + 1
+          )}`;
+          response.transcript = formatData.parseTranscript(response.transcript);
+          viewsCounter
+            .addViews(response.num)
+            .then((viewsData) => {
+              res.render("home", {
+                data: response,
+                displayTranscript: displayTranscript,
+                disabledPrev: disabledPrev,
+                disabledNext: disabledNext,
+                randomId: randomId,
+                views: viewsData === null ? 0 : viewsData.views,
+              });
+            })
+            .catch((error) => {
+              res.render("home", { err: true });
+            });
+        })
+        .catch((error) => {
+          res.render("home", { err: true });
+        });
     })
     .catch((error) => {
-      res.render("home", { err: true });
+      loadComicInfo
+        .currentComicNum()
+        .then((currentComicNum) => {
+          const randomId = `/comic/${Math.floor(
+            Math.random() * (currentComicNum - 1) + 1
+          )}`;
+
+          res.render("home", {
+            err: true,
+            randomId: randomId,
+          });
+        })
+        .catch((error) => {
+          res.render("home", { err: true });
+        });
     });
 });
 
@@ -85,7 +146,30 @@ app.post("/find", (req, res) => {
 });
 
 app.get(/.*/, function (req, res) {
-  res.render("home", { err: true });
+  loadComicInfo
+    .currentComicNum()
+    .then((currentComicNum) => {
+      const randomId = `/comic/${Math.floor(
+        Math.random() * (currentComicNum - 1) + 1
+      )}`;
+      res.render("home", {
+        err: true,
+        randomId: randomId,
+      });
+    })
+    .catch((error) => {
+      res.render("home", { err: true });
+    });
 });
 
-app.listen(HTTP_PORT, onHttpStart);
+viewsCounter
+  .connect()
+  .then(() => {
+    app.listen(HTTP_PORT, () => {
+      console.log("Server listening on: " + HTTP_PORT);
+    });
+  })
+  .catch((err) => {
+    console.log("unable to start the server: " + err);
+    process.exit();
+  });

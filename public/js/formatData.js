@@ -25,7 +25,7 @@ module.exports = {
         default:
           parsedTranscript += `<p class="comic-text">${lines[line]
             .replace(
-              /^[A-Za-z\s]*:/,
+              /^[0-9A-Za-z-\s#]*:/,
               `<span class="speaker">${
                 lines[line].substr(0, lines[line].indexOf(":") + 1) + "\n "
               }</span>`
@@ -36,6 +36,7 @@ module.exports = {
     }
     return parsedTranscript;
   },
+  // parseAlt: function (alt) <-- TODO
   formatDate: function (response) {
     return new Date(
       `${response.year}-${("0" + response.month).slice(-2)}-${(
