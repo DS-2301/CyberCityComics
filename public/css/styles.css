@@ -75,8 +75,23 @@ body {
   display: block;
 }
 
+@keyframes nav-show {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(5em + 2px);
+  }
+}
+
 #nav-show:target {
   display: flex;
+  animation-name: nav-show;
+  animation-duration: 1s;
 }
 
 #transcript-show > .nav-link {
@@ -155,6 +170,7 @@ body {
   position: fixed;
   width: 96vw;
   background-color: white;
+  z-index: 2;
 }
 
 .logo {
@@ -186,10 +202,29 @@ body {
   padding: 0.5em 1em 0.5em 1em;
   width: 7em;
   font-family: "Staatliches", cursive;
+  transition: transform 500ms;
+}
+
+@keyframes nav-hover {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 80, 80, 0.719);
+  }
+  10% {
+    box-shadow: 0 0 0 0.2em rgba(255, 80, 80, 0.719);
+  }
+  90% {
+    box-shadow: 0 0 0 0.2em rgba(255, 80, 80, 0.719);
+  }
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 80, 80, 0.719);
+  }
 }
 
 .nav-link:hover {
-  box-shadow: 2px 2px 2px 2px red;
+  animation-name: nav-hover;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  transform: translateY(2px);
 }
 
 .search-form {
@@ -243,8 +278,8 @@ input[type="number"] {
 
 .find-button > .navbar-icon {
   padding: 0;
-  height: 1.5vw;
-  width: 1.5vw;
+  height: 1em;
+  width: 1em;
   margin: auto;
 }
 
@@ -292,7 +327,7 @@ input[type="number"] {
     flex-direction: column;
     align-items: center;
     position: fixed;
-    top: calc(5.2em + 1px);
+    top: calc(5em + 2px);
     border-bottom: solid black 1px;
   }
 

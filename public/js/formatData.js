@@ -25,13 +25,13 @@ module.exports = {
         default:
           parsedTranscript += `<p class="comic-text">${lines[line]
             .replace(
-              /^[0-9A-Za-z-\s#]*:/,
+              /^[0-9A-Za-z-\s#(),]*:/,
               `<span class="speaker">${
                 lines[line].substr(0, lines[line].indexOf(":") + 1) + "\n "
               }</span>`
             )
-            .replace(/\[\[/g, "<span class='scene-visual'> ")
-            .replace(/\]\]/g, " </span >")}</p>`;
+            .replace(/\[\[|\<\<|^\*|\s\*/g, "<span class='scene-visual'> ")
+            .replace(/\]\]|\>\>|\*$|\*\s/g, " </span >")}</p>`;
       }
     }
     return parsedTranscript;
