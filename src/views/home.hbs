@@ -1,0 +1,29 @@
+<html lang="en">
+
+  <head>
+    <title>Cyber City Comics</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Staatliches&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+      {{>navbar}}
+      <div class="content-container">
+        {{#if err}} 
+            {{>notFound}}
+        {{else}}    
+            <div class="container">
+            {{>comicCard data=data}}
+            </div>
+        {{/if}}
+    </div>
+  </body>
+
+</html>

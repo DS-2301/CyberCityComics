@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <div>
+    <a href={{randomComic}} class="nav-link">
+      Random Comic
+      <img class="navbar-icon" src="/icons/random.svg" />
+    </a>
+  </div>
+  <div>
+    <a class="logo" href="/">
+      Cyber City Comics
+    </a>
+  </div>
+  <div>
+    <form action="/find" method="POST" class="search-form">
+      <input
+        type="number"
+        id="find"
+        name="find"
+        placeholder="Enter Comic ID"
+        class="find-comic"
+      />
+      <button class="find-button" type="submit">
+        <img class="navbar-icon" src="/icons/search.svg" />
+      </button>
+    </form>
+  </div>
+  <script>
+    console.log(document.getElementById("find").value)
+  </script>
+
+</nav>

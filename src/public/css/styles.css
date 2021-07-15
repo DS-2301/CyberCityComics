@@ -1,0 +1,236 @@
+body {
+  margin: 0;
+}
+
+.content-container {
+  margin: 0 0 2vw 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.container {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.comic-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-header {
+  font-size: 2.3em;
+  font-family: "Staatliches", cursive;
+}
+
+.comic-navigation {
+  padding-top: 5em;
+  display: flex;
+  align-items: center;
+}
+
+.comic-img {
+  max-width: 50vw;
+}
+
+.views-date {
+  font-family: "Staatliches", cursive;
+  color: black;
+  margin: 3em 0 3em 0;
+  padding: 1em 2em 1em 2em;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  background-image: url("/images/navbarCover.png");
+  background-size: 100%;
+  border: solid 1px black;
+  border-radius: 0.5em;
+  font-size: 1.5em;
+}
+
+.comic-transcript {
+  max-width: 80%;
+}
+
+#transcript-show {
+  display: none;
+  padding-top: 2em;
+}
+
+#transcript-hide:target {
+  display: none;
+}
+
+#transcript-show:target {
+  display: block;
+}
+
+#transcript-show > .nav-link {
+  margin: auto;
+}
+
+.scene-description {
+  text-align: center;
+  color: gray;
+  font-style: italic;
+  font-size: 1em;
+}
+
+.scene-visual {
+  text-align: center;
+  color: gray;
+  font-size: 1em;
+}
+
+.comic-text {
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.1em;
+}
+
+.comic-text > .scene-visual {
+  padding: 0 0.3em 0 0.3em;
+}
+
+.author-comment-head {
+  font-size: 1.3em;
+}
+
+.author-comment {
+  font-size: 1.4em;
+  font-family: "Caveat", cursive;
+  padding-bottom: 2em;
+}
+
+.comic-transcript > .nav-link:last-child {
+  margin-top: 2vw !important;
+}
+
+.speaker {
+  font-weight: bold;
+  padding-right: 0.3em;
+}
+
+.comic-navigation:last-child {
+  padding-top: 2em;
+}
+
+.navigation-icons {
+  height: 3em;
+  width: 3em;
+}
+
+.navbar {
+  display: flex;
+  background-image: url("/images/navbarCover.png");
+  background-size: 100vw;
+  font-family: "Staatliches", cursive;
+  padding: 0 2vw 0.2em 2vw;
+  height: 5em;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: black 1px solid;
+  position: fixed;
+  width: 96vw;
+  background-color: white;
+}
+
+.logo {
+  font-size: 3em;
+  margin-left: auto;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  text-shadow: 3px 3px rgba(255, 80, 80, 0.699);
+}
+
+.navbar-icon {
+  height: 1em;
+  width: 1em;
+  padding-left: 0.5em;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 80, 80);
+  border: solid 1px black;
+  border-radius: 0.5em;
+  padding: 0.5em 1em 0.5em 1em;
+  width: 7em;
+  font-family: "Staatliches", cursive;
+}
+
+.nav-link:hover {
+  color: red;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  height: 2em;
+  width: 10vw;
+  margin: 0;
+  background-color: rgb(255, 103, 103);
+  border: solid 1px black;
+  border-radius: 0.5em;
+}
+
+.find-comic {
+  color: black;
+  display: flex;
+  margin-right: 0;
+  padding-left: 1em;
+  height: 2em;
+  width: 8vw;
+  font-family: "Staatliches", cursive;
+  font-size: 16px;
+  background-color: rgb(255, 103, 103);
+  border: none;
+  border-radius: 0.5em;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.find-button {
+  display: flex;
+  padding: 0.3em;
+  margin-left: 0;
+  height: 2em;
+  width: 2vw;
+  font-family: "Staatliches", cursive;
+  font-size: 16px;
+  background-color: rgb(255, 103, 103);
+  border: none;
+  border-left: black 1px solid;
+  border-radius: 0 0.5em 0.5em 0;
+}
+
+.find-button > .navbar-icon {
+  padding: 0;
+}
+
+.not-found {
+  padding-top: 10em;
+  font-family: "Staatliches", cursive;
+  text-align: center;
+}
