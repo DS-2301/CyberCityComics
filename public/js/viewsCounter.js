@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
-let mongoDBConnectionString =
-  "mongodb+srv://Daniil:AfpwY9cNymNDPHLo@cluster0.6baqj.mongodb.net/Data?retryWrites=true&w=majority";
-// process.env.MONGO_URL;
+let mongoDBConnectionString = process.env.MONGO_URL;
 
 let Schema = mongoose.Schema;
 
